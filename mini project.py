@@ -268,21 +268,8 @@ def place_order(user_id):
         print(f"{name} - ₹{price}")
     print(f"TOTAL: ₹{total}")
 
-    confirm = input("\nConfirm order? (yes/no): ")
-
-    if confirm.lower() == "yes":
-        c.execute("INSERT INTO orders (user_id, total) VALUES (?, ?)", (user_id, total))
-        order_id = c.lastrowid
-
-        for name, price in cart:
-            c.execute("INSERT INTO order_items (order_id, item_name, price) VALUES (?, ?, ?)", (order_id, name, price))
-
-        conn.commit()
-        print("\n Order placed successfully!\n")
-    else:
-        print(" Order cancelled.\n")
-
-
+conn.commit()
+        
 def customer_menu(user):
     while True:
         print("""
@@ -326,3 +313,4 @@ def main():
 
 main()
 conn.close()
+
